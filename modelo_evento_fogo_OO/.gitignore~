@@ -1,0 +1,20 @@
+# Não subir pasta
+
+# Ambiente Virtual
+.venv_me
+
+# Dados cache
+.ipynb_checkpoints/
+*.egg-info/
+.vscode/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+#mapas
+*.html
+
+# gdfs
+comparacao/*.gpkg

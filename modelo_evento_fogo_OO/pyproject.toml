@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "descreve-fogo"
+version = "0.1.0"
+description = "Modulo de agregacao de eventos de fogo"
+requires-python = ">=3.12"
+dependencies = [
+    "geopandas",
+    "pandas",
+    "numpy",
+    "shapely",
+    "networkx",
+    "scipy",
+    "pytest",
+    "pyYAML"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

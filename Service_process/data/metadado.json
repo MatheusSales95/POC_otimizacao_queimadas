@@ -1,0 +1,142 @@
+{
+    "Services": "Process",
+    "Version": "0.1 beta",    
+    "Input in API service": {
+        "Process":{
+            "Description": "Serviço para processamento de focos de calor.",
+            "Nature": "-POST Focos de calor",
+            "input": {
+               "file":{
+                    "type": ".GeoJson or .CSV",
+                    "mandatory": true,
+                    "description": "Focos de calor"
+               },
+               "radius": {
+                    "type":"Interger",
+                    "mandatory": true,
+                    "description": "Raio do Buffer em metros."
+               },
+               "leg day":{ 
+                    "type":"Interger",
+                    "mandatory": true,
+                    "description": "Pérido de observação em dias."
+               }
+            }
+        }
+    },
+    "Output in API service":{
+        "Process": "Fire events in temporary .GeoJason waiting the service injection."
+    },
+    "Exemple Fire Event": {
+        "id_evento": {
+            "Type": "integer",
+            "Description": "Identificador serial para cada evento de fogo."
+        },
+        "data_inicio": {
+            "Type": "date",
+            "Description": "Data da primeira detecção do foco de calor vinculada ao evento."
+        },
+        "data_fim": {
+            "Type": "date",
+            "Description": "Data última detecção do foco de calor vinculada ao evento considerando a janela de observação."
+        },
+        "area_inicio": {
+            "Type": "double precision",
+            "Description": "Área da geométria inicial do evento em hectare."
+        },
+        "area_fim": {
+            "Type": "double precision",
+            "Description": "Área da geométria final do evento em hectare."
+        },
+        "geo": {
+            "Type": "POLYGON (EPSG:4326)",
+            "Description": "Polígono que representa a área perimetrada do evento de fogo."
+        },
+        "uuid": {
+            "Type": "uuid",
+            "Description": "Identificador universal e único para cada evento de fogo."
+        },
+        "Exemplo": {
+            "type": "name",
+            "properties": {
+                "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+            },
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "data_inicio": "2024-08-01",
+                        "area_inicio": 3527.36,
+                        "data_fim": "2024-08-01",
+                        "area_fim": null,
+                        "id_evento": "123abc",
+                        "descricao": "Evento com duração de 1 dia e área de 3527hec || Sem descrição"
+                    },
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [
+                                    -48.8,
+                                    -20.4
+                                ],
+                                [
+                                    -48.7,
+                                    -20.4
+                                ],
+                                [
+                                    -48.7,
+                                    -20.5
+                                ],
+                                [
+                                    -48.8,
+                                    -20.4
+                                ]
+                            ]
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "Exemple Focos": {
+        "id_foco": {
+            "Type": "UUID",
+            "Description": "Identificador UUID único do foco de calor."
+        },
+        "data": {
+            "Type": "date",
+            "Description": "Data da ocorrência do foco de calor."
+        },
+        "geometry": {
+            "Type": "POINT (EPSG:4326)",
+            "Description": "Latitude e Longitude de ocorrência do foco de calor."
+        },
+        "Exemple": {
+            "type": "name",
+            "properties": {
+                "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+            },
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "id_foco": "123abc",
+                        "data": "2024-08-01"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            [
+                                [
+                                    -48.8,
+                                    -20.4
+                                ]
+                            ]
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,19 @@
+buffer:
+  tipo: quadrado
+  por_satelite:
+    GOES-16: 
+      raio: 1300
+    GOES-19:
+      raio: 1300
+    AQUA_M-T: 
+      raio: 500
+    TERRA: 
+      raio: 200
+
+crs:
+  metrico: "EPSG:5880"
+  lat_lon: "EPSG:4326"
+
+agregacao:
+  agregar_por_dia: True
+  intervalo_dias_espaco_temporal: 7

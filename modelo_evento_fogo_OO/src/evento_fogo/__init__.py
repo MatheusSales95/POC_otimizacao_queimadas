@@ -1,0 +1,2 @@
+from evento_fogo.integracao.integrador import integrar_eventos as integrador
+from evento_fogo.processamento.identificacao_grupos_espaciais import IdentificadorGruposEspaciais

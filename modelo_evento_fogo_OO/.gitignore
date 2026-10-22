@@ -1,0 +1,22 @@
+# Não subir pasta
+
+# Ambiente Virtual
+.venv_me
+
+# Dados cache
+.ipynb_checkpoints/
+*.egg-info/
+.vscode/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+#mapas
+*.html
+
+# gdfs
+comparacao/*.gpkg
+
+/notebooks_dados/eventos_sp_2024.geojson

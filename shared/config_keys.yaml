@@ -1,0 +1,210 @@
+schema: "regiao.regiaoibge"
+raio_buffer: 1300
+banco_focos_reference: "collection2.focos_bdq_c2"
+chunk_days: 14
+
+tables:
+  evento: "eventos"
+  foco: "focos"
+  satelite: "satelite"
+  status: "status"
+  regiao: "regioes"
+  eventos_focos: "eventos_focos"
+  eventos_satelites: "eventos_satelites"
+  eventos_regioes: "eventos_regioes"
+  eventos_predecessores: "eventos_predecessores"
+  focos_regioes: "focos_regioes"
+  descricao: "descricao"
+
+columns:
+  evento:
+    id_evento: "id_evento"
+    data_inicio: "data_inicio"
+    data_fim: "data_fim"
+    data_ultima_observacao: "data_ultima_observacao"
+    status: "status"
+    area_inicio: "area_inicio"
+    area_fim: "area_fim"
+    recorrencia: "recorrencia"
+    persistencia: "persistencia"
+    duracao: "duracao"
+    qnt_focos: "quantidade_focos"
+    fusionado: "fusionado"
+    geometria: "geometria"
+    predecessores: "predecessores"
+    id_evento_absorvedor: "id_evento_absorvedor"
+
+  foco:
+    id_foco: "id_foco"
+    data: "data"
+    ponto: "ponto"
+    dias_sem_chuva: "dias_sem_chuva"
+    frp: "frp"
+    id_satelite: "id_satelite"
+
+  satelite:
+    id_satelite: "id_satelite"
+    satelite: "satelite"
+
+  status:
+    id_status: "id_status"
+    nome: "nome"
+
+  regiao:
+    id_regiao: "id_regiao"
+    nome_regiao: "nome_regiao"
+    tipo_regiao: "tipo_regiao"
+    geometria: "geometry_regiao"
+
+  descricao:
+    id_descricao: "id_descricao"
+    descricao: "descricao"
+    id_evento: "id_evento"
+
+geojson:
+  evento:
+    id_evento: "id_evento"
+    ids_focos: "ids_focos"
+    data_inicio: "data_inicio"
+    data_fim: "data_fim"
+    data_ultima_observacao: "data_ultima_observacao"
+    status: "status"
+    area_inicio: "area_inicio"
+    area_fim: "area_fim"
+    fusionado: "fusionado"
+    recorrencia: "recorrencia"
+    persistencia: "persistencia"
+    duracao: "duracao"
+    qnt_focos: "quantidade_focos"
+    id_evento_absorvedor: "id_evento_absorvedor"
+    predecessores: "predecessores"
+    historico_regioes: "historico_regioes"
+
+  foco:
+    id_foco: "id"
+    data: "data"
+    dias_sem_chuva: "dias_sem_chuva"
+    frp: "frp"
+    id_satelite: "satelite"
+    ponto: "ponto"
+
+status_data:
+  - id_status: 1
+    nome: "ativo"
+  - id_status: 2
+    nome: "observacao"
+  - id_status: 3
+    nome: "extinto"
+
+satelite_data:
+  - id_satelite: 1
+    satelite: "GOES-13"
+    raio: 1300
+  - id_satelite: 2
+    satelite: "AQUA_M-M"
+    raio: 500
+  - id_satelite: 3
+    satelite: "AQUA_M-T"
+    raio: 500
+  - id_satelite: 4
+    satelite: "GOES-16"
+    raio: 1300
+  - id_satelite: 5
+    satelite: "GOES-19"
+    raio: 1300
+  - id_satelite: 6
+    satelite: "METOP-B"
+    raio: 500
+  - id_satelite: 7
+    satelite: "METOP-C"
+    raio: 500
+  - id_satelite: 8
+    satelite: "MSG-03"
+    raio: 500
+  - id_satelite: 9
+    satelite: "NOAA-18"
+    raio: 500
+  - id_satelite: 10
+    satelite: "NOAA-18D"
+    raio: 500
+  - id_satelite: 11
+    satelite: "NOAA-19"
+    raio: 500
+  - id_satelite: 12
+    satelite: "NOAA-19D"
+    raio: 500
+  - id_satelite: 13
+    satelite: "NOAA-20"
+    raio: 500
+  - id_satelite: 14
+    satelite: "NOAA-21"
+    raio: 500
+  - id_satelite: 15
+    satelite: "NPP-375"
+    raio: 500
+  - id_satelite: 16
+    satelite: "NPP-375D"
+    raio: 500
+  - id_satelite: 17
+    satelite: "TERRA_M-M"
+    raio: 500
+  - id_satelite: 18
+    satelite: "TERRA_M-T"
+    raio: 500
+  - id_satelite: 19
+    satelite: "NOAA-12"
+    raio: 500
+  - id_satelite: 20
+    satelite: "NOAA-12D"
+    raio: 500
+  - id_satelite: 21
+    satelite: "NOAA-14"
+    raio: 500
+  - id_satelite: 22
+    satelite: "NOAA-15"
+    raio: 500
+  - id_satelite: 23
+    raio: 500
+    satelite: "NOAA-15D"
+  - id_satelite: 24
+    raio: 500
+    satelite: "NOAA-16"
+  - id_satelite: 25
+    raio: 500
+    satelite: "NOAA-16N"
+  - id_satelite: 26
+    raio: 750
+    satelite: "NOAA-17"
+  - id_satelite: 29
+    satelite: "GOES-10"
+    raio: 1300
+  - id_satelite: 27
+    satelite: "GOES-12"
+    raio: 1300
+  - id_satelite: 28
+    satelite: "GOES-08"
+    raio: 1300
+  - id_satelite: 30
+    satelite: "AQUA_M"
+    raio: 500
+  - id_satelite: 31
+    satelite: "ATSR"
+    raio: 500
+  - id_satelite: 32
+    satelite: "MSG-02"
+    raio: 500
+  - id_satelite: 33
+    satelite: "TERRA_M"
+    raio: 200
+  - id_satelite: 34
+    satelite: "TRMM"
+    raio: 500
+
+satelites_goes: [1, 4, 5, 27, 28, 29]
+satelites_noaa: [9, 10, 11, 12, 13, 14, 19, 20, 21, 22, 23, 24, 25]
+satelites_aqua_terra: [2, 3, 17, 18, 30, 33]
+satelites_metop: [6, 7]
+satelites_msg: [8, 32]
+satelites_npp: [15, 16]
+satelites_atrs: [31]
+satelites_trmm: [34]
