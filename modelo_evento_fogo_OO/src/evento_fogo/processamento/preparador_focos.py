@@ -16,9 +16,15 @@ class PreparadorFocos:
         self.crs_saida = crs_saida
 
     def _ler_geojson(self) -> gpd.GeoDataFrame:
-        return gpd.read_file(
-            StringIO(self.focos_geojson)
-        )
+        if isinstance(self.focos_geojson, gpd.GeoDataFrame):
+            gdf = self.focos_geojson.copy()
+        else:
+            gdf = gpd.read_file(
+                StringIO(self.focos_geojson)
+            )
+        if gdf.crs is None:
+            gdf.set_crs("EPSG:4326", inplace=True)
+        return gdf
 
     @staticmethod
     def _validar_colunas(gdf: gpd.GeoDataFrame) -> None:

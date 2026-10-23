@@ -16,15 +16,17 @@ GeoJSON: TypeAlias = str
 from shared.config import config_keys
 
 def integrar_eventos(
-    focos_dia_geojson: GeoJSON,
+    focos_dia_geojson: GeoJSON | gpd.GeoDataFrame,
     gdf_banco: gpd.GeoDataFrame | None = None,
-) -> GeoJSON:
+    buffer_por_satelite: dict | None = None,
+) -> gpd.GeoDataFrame:
     
     #-------------------------------------------------------------------------------------
     # Configuração - Arquivo: src/infraestrutura/config/config.yaml
     #-------------------------------------------------------------------------------------
     config = Configuracao()
-    buffer_por_satelite = config.obter_buffer_por_satelite()
+    if buffer_por_satelite is None:
+        buffer_por_satelite = config.obter_buffer_por_satelite()
     tipo_buffer = config.obter_tipo_buffer()
     crs_metrico = config.obter_crs_metrico()
     crs_lat_lon = config.obter_crs_lat_lon()
