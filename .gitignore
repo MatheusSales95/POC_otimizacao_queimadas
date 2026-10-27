@@ -5,3 +5,6 @@ venv/
 __pycache__/
 Services_Descreve/
 Service_Descreve/
+*.tif
+*.zip
+*.gpkg

@@ -10,7 +10,6 @@ import os
 # =====================================================================
 # CONFIGURAÇÕES
 # =====================================================================
-COUNT_ESPERADO_EVENTOS = 200 # Ni limite, pior caso, deve-se formar tantos eventos quanso focos houver
 MARGIN_BOX = 50 # Margem em metros ao redor do polígono de referência para extração dos focos
 
 # =====================================================================
@@ -42,6 +41,9 @@ if geom_mask is not None:
 else:
     focos_tile = gdf_focos_total
 
+COUNT_ESPERADO_EVENTOS = len(focos_tile) # No limite, pior caso, deve-se formar tantos eventos quanso focos houver
+
+
 print(f"Focos no Pantanal inteiro: {len(gdf_focos_total)} | Focos dentro do Tile: {len(focos_tile)}")
 
 # =====================================================================
@@ -70,8 +72,6 @@ def fob(x):
     if raio_key in fob_cache:
         return fob_cache[raio_key]
 
-    print(f"  -> [Simulação] Avaliando raio = {raio_key} m...", flush=True)
-
     # Processa os eventos para o raio candidato
     eventos = gerarEventos.executarProcessamento(
         data_inicio="2024-08-04",
@@ -82,6 +82,7 @@ def fob(x):
         retornar_crs_4326=False  # Mantém EPSG:5880 para cálculo de área
     )
     count_eventos = len(eventos)
+    print(f"  -> [Simulação] Avaliando raio = {raio_key} m | {len(fob_cache)}/ {n_generations * pop_size} simulações já realizadas | número de eventos {count_eventos}...", flush=True)
     if count_eventos == 0:
         fob_cache[raio_key] = 999.0
         return 999.0  # Penalidade se o raio não formar nenhum evento
@@ -97,16 +98,21 @@ def fob(x):
         intersecao = geom_eventos.intersection(geom_mask).area
         # Coeficiente de Dice (mede sobreposição: 1 = perfeito, 0 = sem interseção)
         denom_dice = area_eventos + area_mask
+
         dice = (2.0 * intersecao / denom_dice) if denom_dice > 0 else 0.0
+        
+        ### MELHORAR A ESCALA DA FOB (LOG OU EXP) ####
+        #### F1 SCORE #### JUSTIFICAR O PRECISION E RECALL #####
+
+
         # Dissimilaridade (quanto menor, mais próxima a área acumulada está da máscara)
         dissimilaridade = 1.0 - dice
         # Penalidade pelo número de eventos (normalizado para 0 a 1)
         penalidade_eventos = min(count_eventos / COUNT_ESPERADO_EVENTOS, 1.0)
         
         # Combinação multiobjetivo:
-        # Peso 70% para sobreposição da área acumulada e 30% para reduzir fragmentação
-        w_area = 0.7
-        w_eventos = 0.3
+        w_area = 0.8
+        w_eventos = 0.2
         f_val = (w_area * dissimilaridade) + (w_eventos * penalidade_eventos)
         
         fob_cache[raio_key] = float(f_val)
@@ -122,9 +128,9 @@ def fob(x):
 # =====================================================================
 minRatio = 1000
 maxRatio = 1500
-pop_size = 20      
-crom_size = 16      # 16 bits -> intervalo [1000, 1500]
-n_generations = 10
+pop_size = 50      
+crom_size = 12      # 16 bits -> intervalo [1000, 1500]
+n_generations = 25
 pm = 0.01
 
 print("\n--- Inicializando População Inicial do AG ---", flush=True)
