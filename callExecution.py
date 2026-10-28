@@ -15,7 +15,7 @@ MARGIN_BOX = 50 # Margem em metros ao redor do polígono de referência para ext
 # =====================================================================
 # 1. CARREGAR A MÁSCARA DE POLÍGONOS UMA ÚNICA VEZ (FORA DO AG)
 # =====================================================================
-geometrias_path = 'poligonsMask'
+geometrias_path = 'MaskPoligon'
 arquivos_geojson = glob.glob(os.path.join(geometrias_path, "*.geojson"))
 
 if arquivos_geojson:
@@ -126,7 +126,7 @@ def fob(x):
 # =====================================================================
 # 3. EXECUTAR O ALGORITMO GENÉTICO
 # =====================================================================
-minRatio = 1000
+minRatio = 900
 maxRatio = 1500
 pop_size = 50      
 crom_size = 12      # 16 bits -> intervalo [1000, 1500]
